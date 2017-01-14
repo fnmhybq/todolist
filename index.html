@@ -1,0 +1,65 @@
+<!doctype html>
+<html>
+
+  <head>
+    <title>任务清单-todoList</title>
+    <meta charset="utf-8">
+    <script src="js/jquery-3.1.1.min.js"></script>
+    <script src="js/bootstrap.min.js"></script>
+    <script src="js/vue.min.js"></script>
+    <link rel="stylesheet" href="css/style.css" type="text/css">
+  </head>
+
+  <body>
+    <div class="container">
+
+	     <div class="row clearfix">
+		       <div class="col-md-12 column">
+             <br/>
+             <h1>任务清单／todoList</h1>
+             <br/>
+		       </div>
+	     </div>
+
+        <div id="app">
+    	     <div class="row clearfix">
+    		       <div class="col-md-8 column">
+                 <input class="inputTask" placeholder=" Please enter your task here!" v-on:keyup.enter="add" v-model="newTasks">
+                 <li class="list-item" v-for="item in tasks" v-bind:class="{turnGreen:!item.hasDone,turnGrey:item.hasDone}" v-on:click="changeStatus(item)">{{item.task}}</li>
+               </div>
+    		       <div class="col-md-4 column">
+    		       </div>
+    	    </div>
+        </div>
+
+    </div>
+
+    <script>
+      var app =new Vue({
+        el: '#app',
+        data: {
+          tasks: [
+            {task: 'have a dinner', hasDone: false}
+          ],
+          newTasks: ''
+        },
+        methods: {
+          add: function(){
+            if(this.newTasks){
+            this.tasks.push({
+              task: this.newTasks,
+              hasDone: false
+            }),
+            this.newTasks = ''}
+          },
+          changeStatus: function(item){
+            item.hasDone = !item.hasDone
+          }
+        }
+      })
+    </script>
+
+
+  </body>
+
+</html>
